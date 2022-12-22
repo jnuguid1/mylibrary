@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chivo+Mono">
+    <script src="https://kit.fontawesome.com/80f4c3976c.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+        <div class="header">
+          <h1>My Library</h1>
+        </div>
+        <div class="content">
+          <div class="new-book-button-container">
+            <button class="new-book-button">NEW BOOK</button>
+          </div>
+          <div class="form-container">
+            <form id="add-book-form">
+              <div>
+                <label for="book-title">Book Title</label>
+                <input type="text" name="book-title" id="book-title" required>
+              </div>
+              <div>
+                <label for="book-author">Author</label>
+                <input type="book-author" id="book-author" required>
+              </div>
+              <div>
+                <label for="book-pages">Page #</label>
+                <input type="number" name="book-pages" id="book-pages" required>
+              </div>
+              <div>
+                <label for="completed">Read</label>
+                <input type="checkbox" name="completed" id="completed">
+              </div>
+              <button type="submit" id="form-submit" form="add-book-form">SUBMIT</button>
+            </form>
+            
+          </div>
+          <div class="book-container">
+            <div class="book-card">
+              <div>
+                <h2>Deathly Hallows</h2>
+                <p>J.K. Rollings</p>
+                <p>821 pages</p>
+                <p>Completed</p>
+              </div>
+              <div class="icon-row">
+                <i class="fa-solid fa-square-check fa-xl"></i>
+                <i class="fa-solid fa-trash fa-xl"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </body>
+</html>
