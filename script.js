@@ -8,16 +8,18 @@ const authorInput = document.querySelector('#book-author');
 const pagesInput = document.querySelector('#book-pages');
 const completedInput = document.querySelector('#completed');
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.info = function () {
-    return `${title} by ${author}, ${pages} pages, ${
-      read ? 'has read' : 'has not read'
-    }`;
-  };
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.info = function () {
+      return `${title} by ${author}, ${pages} pages, ${
+        read ? 'has read' : 'has not read'
+      }`;
+    };
+  }
 }
 
 function displayBooks() {
@@ -25,6 +27,12 @@ function displayBooks() {
   while (child) {
     bookContainer.removeChild(child);
     child = bookContainer.lastElementChild;
+  }
+
+  function removeBook(event) {
+    const index = event.target.getAttribute('index');
+    myLibrary.splice(index, 1);
+    displayBooks();
   }
 
   let index = 0;
@@ -68,11 +76,6 @@ function displayBooks() {
   });
 }
 
-function removeBook(event) {
-  const index = event.target.getAttribute('index');
-  myLibrary.splice(index, 1);
-  displayBooks();
-}
 function addBookToLibrary(event) {
   const book = new Book(
     titleInput.value,
