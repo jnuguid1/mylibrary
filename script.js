@@ -14,11 +14,12 @@ class Book {
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.info = function () {
-      return `${title} by ${author}, ${pages} pages, ${
-        read ? 'has read' : 'has not read'
-      }`;
-    };
+  }
+
+  info() {
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${
+      this.read ? 'has read' : 'has not read'
+    }`;
   }
 }
 
