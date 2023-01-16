@@ -1,8 +1,8 @@
 const myLibrary = [];
+const form = document.querySelector('form');
 const bookContainer = document.querySelector('.book-container');
 const newBookButton = document.querySelector('.new-book-button');
 const formContainer = document.querySelector('.form-container');
-const submitBookButton = document.querySelector('#form-submit');
 const titleInput = document.querySelector('#book-title');
 const authorInput = document.querySelector('#book-author');
 const pagesInput = document.querySelector('#book-pages');
@@ -77,7 +77,7 @@ function displayBooks() {
   });
 }
 
-function addBookToLibrary(event) {
+function addBookToLibrary() {
   const book = new Book(
     titleInput.value,
     authorInput.value,
@@ -91,14 +91,63 @@ function addBookToLibrary(event) {
   pagesInput.value = '';
   completedInput.checked = false;
   formContainer.classList.toggle('form-container');
-  event.preventDefault();
 }
+
+titleInput.addEventListener('input', () => {
+  if (titleInput.validity.valueMissing) {
+    titleInput.setCustomValidity('A title is required');
+  } else {
+    titleInput.setCustomValidity('');
+  }
+  titleInput.reportValidity();
+});
+
+authorInput.addEventListener('input', () => {
+  if (authorInput.validity.valueMissing) {
+    authorInput.setCustomValidity('An author is required');
+  } else {
+    authorInput.setCustomValidity('');
+  }
+  authorInput.reportValidity();
+});
+
+pagesInput.addEventListener('input', () => {
+  if (pagesInput.validity.valueMissing) {
+    pagesInput.setCustomValidity('Page number is required');
+  } else {
+    pagesInput.setCustomValidity('');
+  }
+  pagesInput.reportValidity();
+});
 
 newBookButton.addEventListener('click', () => {
   formContainer.classList.toggle('form-container');
 });
 
-submitBookButton.addEventListener('click', addBookToLibrary, false);
+function showError() {
+  if (titleInput.validity.valueMissing) {
+    titleInput.setCustomValidity('A title is required');
+    titleInput.reportValidity();
+  } else if (authorInput.validity.valueMissing) {
+    authorInput.setCustomValidity('An author is required');
+    authorInput.reportValidity();
+  } else if (pagesInput.validity.valueMissing) {
+    pagesInput.setCustomValidity('Page number is required');
+    pagesInput.reportValidity();
+  }
+}
+
+form.addEventListener('submit', (event) => {
+  if (!titleInput.validity.valid || !authorInput.validity.valid
+    || !pagesInput.validity.valid) {
+    showError();
+  } else {
+    addBookToLibrary();
+  }
+  event.preventDefault();
+});
+
+// submitBookButton.addEventListener('click', addBookToLibrary, false);
 
 myLibrary.push(new Book('The Hobbit', 'J.R.R. Tolkien', 227, true));
 myLibrary.push(new Book('Fellowship of the Ring', 'J.R.R. Tolkien', 441, true));
